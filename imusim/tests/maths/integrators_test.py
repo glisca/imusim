@@ -18,7 +18,7 @@ Tests for integration methods.
 # You should have received a copy of the GNU General Public License
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
+
 import numpy as np
 from imusim.maths import integrators
 from imusim.testing.vectors import assert_vectors_correlated

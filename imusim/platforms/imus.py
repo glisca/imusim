@@ -33,12 +33,10 @@ from imusim.platforms.radios import Radio, IdealRadio
 from imusim.maths.vectors import vector
 from imusim.utilities.documentation import prepend_method_doc
 
-class IMU(Platform):
+class IMU(Platform, metaclass=ABCMeta):
     """
     An IMU hardware platform with one or more sensors.
     """
-
-    __metaclass__ = ABCMeta
 
     @abstractproperty
     def sensors(self):

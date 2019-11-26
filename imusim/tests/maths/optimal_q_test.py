@@ -75,7 +75,7 @@ def checkOptimalQ(states):
 
         def filterError(q, filter):
 
-            filter = filter(q, states)
+            filter = list(filter(q, states))
 
             z = np.empty_like(x)
 

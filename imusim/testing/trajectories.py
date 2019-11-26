@@ -18,7 +18,7 @@ Utilities for testing trajectories.
 # You should have received a copy of the GNU General Public License
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
+
 from imusim.testing.quaternions import assertQuaternionAlmostEqual
 from imusim.maths.quaternions import QuaternionArray
 from imusim.testing.vectors import assert_vectors_correlated
@@ -45,11 +45,11 @@ def checkTrajectory(T, truePositions, trueRotations):
     assert_vectors_correlated(T.position(t), p)
 
     # Check velocity
-    v = np.array(map(np.gradient, p)) / dt
+    v = np.array(list(map(np.gradient, p))) / dt
     assert_vectors_correlated(T.velocity(t[2:-2]), v[:,2:-2])
 
     # Check acceleration
-    a = np.array(map(np.gradient, v)) / dt
+    a = np.array(list(map(np.gradient, v))) / dt
     assert_vectors_correlated(T.acceleration(t[4:-4]), a[:,4:-4])
 
     # Get time indices at which rotation comparisons valid
@@ -69,6 +69,6 @@ def checkTrajectory(T, truePositions, trueRotations):
     assert_vectors_correlated(trajOmega[:,2:-2], diffOmega[:,2:-2])
 
     # Check angular acceleration
-    diffAlpha = np.array(map(np.gradient, diffOmega)) / dt
+    diffAlpha = np.array(list(map(np.gradient, diffOmega))) / dt
     trajAlpha = T.rotationalAcceleration(t - dt/2)
     assert_vectors_correlated(trajAlpha[:,4:-4], diffAlpha[:,4:-4])

@@ -18,7 +18,7 @@ Simulation of calibration procedures for IMUs.
 # You should have received a copy of the GNU General Public License
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
+
 from imusim.environment.base import Environment
 from imusim.environment.gravity import STANDARD_GRAVITY
 from imusim.platforms.sensors import Sensor
@@ -34,13 +34,12 @@ from imusim.utilities.documentation import prepend_method_doc
 from abc import abstractmethod, ABCMeta
 import numpy as np
 
-class Calibrator(object):
+class Calibrator(object, metaclass=ABCMeta):
     """
     A calibration procedure for IMUs.
 
     @ivar environment: The L{Environment} in which to calibrate.
     """
-    __metaclass__ = ABCMeta
 
     def __init__(self, environment):
         """

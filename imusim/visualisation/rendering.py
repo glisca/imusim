@@ -115,12 +115,10 @@ def autoPositionCamera():
     mlab.roll(0)
     s.disable_render = False
 
-class AnimatedRenderer(object):
+class AnimatedRenderer(object, metaclass=ABCMeta):
     """
     Base class for animation renderers.
     """
-
-    __metaclass__ = ABCMeta
     def __init__(self, *args, **kwargs):
         """
         Initialise renderer.

@@ -18,7 +18,7 @@ Continuous splined trajectories from sampled trajectories.
 # You should have received a copy of the GNU General Public License
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
+
 from imusim.trajectories.sampled import SampledPositionTrajectory, SampledRotationTrajectory
 from imusim.trajectories.sampled import SampledTrajectory
 from imusim.maths.vector_splines import PartialInputVectorSpline

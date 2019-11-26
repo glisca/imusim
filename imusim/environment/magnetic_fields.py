@@ -18,7 +18,7 @@ Magnetic field models.
 # You should have received a copy of the GNU General Public License
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
+
 import imusim.maths.vectors as vectors
 from imusim.maths.vector_fields import VectorField, ConstantVectorField
 from imusim.maths.transforms import cartesianToPolar, polarToCartesian

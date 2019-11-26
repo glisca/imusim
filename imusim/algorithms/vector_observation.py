@@ -18,7 +18,7 @@ Algorithms for estimating orientation from reference vector observations.
 # You should have received a copy of the GNU General Public License
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
+
 from abc import ABCMeta, abstractmethod
 from imusim.maths.quaternions import Quaternion
 from scipy.optimize import newton
@@ -27,7 +27,7 @@ from imusim.utilities.documentation import prepend_method_doc
 import numpy as np
 import math
 
-class VectorObservation(object):
+class VectorObservation(object, metaclass=ABCMeta):
     """
     Base class for all vector observation methods.
 
@@ -36,8 +36,6 @@ class VectorObservation(object):
     Vectors are assumed to be 3x1 L{np.ndarray}s
     """
 
-    __metaclass__ = ABCMeta
-
     def __call__(self, *measurements):
         """
         Estimate the orientation Quaternion from the observed vectors.
@@ -45,7 +43,7 @@ class VectorObservation(object):
         @param measurements: The observed vectors (3x1 L{np.ndarray})
         @return: The estimated orientation L{Quaternion}
         """
-        if any(map(lambda a: np.any(np.isnan(a)), measurements)):
+        if any([np.any(np.isnan(a)) for a in measurements]):
             return Quaternion(np.nan,np.nan,np.nan,np.nan)
         else:
             return self._process(*measurements)

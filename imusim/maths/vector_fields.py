@@ -25,11 +25,10 @@ from imusim.utilities.documentation import prepend_method_doc
 from imusim.maths.natural_neighbour import NaturalNeighbourInterpolatorC
 import numpy as np
 
-class VectorField(object):
+class VectorField(object, metaclass=ABCMeta):
     """
     Base class for vector fields.
     """
-    __metaclass__ = ABCMeta
 
     @abstractmethod
     def __call__(self, position, t):

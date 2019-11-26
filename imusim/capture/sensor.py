@@ -19,7 +19,7 @@ Classes to represent captured sensor data.
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
 import numpy as np
-import cPickle
+import pickle
 
 class SensorDataCapture(object):
     """
@@ -43,7 +43,7 @@ class SensorDataCapture(object):
         @param filename: Name of file to load from.
         @return: A L{SensorDataCapture} object.
         """
-        capture = cPickle.load(open(filename))
+        capture = pickle.load(open(filename))
         assert isinstance(capture, SensorDataCapture), \
                 "File did not contain a SensorDataCapture"
         return capture
@@ -54,14 +54,14 @@ class SensorDataCapture(object):
 
         @param filename: Name of file to save to.
         """
-        cPickle.dump(self, open(filename,'w'))
+        pickle.dump(self, open(filename,'w'))
 
     @property
     def devices(self):
         """
         List of the devices in this capture.
         """
-        return self._devices.values()
+        return list(self._devices.values())
 
     def device(self, id):
         """
@@ -101,7 +101,7 @@ class CapturedDevice(object):
         """
         List of the sensor identifiers on this sensor unit.
         """
-        return self._sensorData.keys()
+        return list(self._sensorData.keys())
 
     def sensorData(self, id):
         """

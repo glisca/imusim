@@ -21,7 +21,7 @@ Radio models.
 from abc import ABCMeta, abstractmethod, abstractproperty
 from imusim.platforms.base import Component
 
-class RadioPacket(dict):
+class RadioPacket(dict, metaclass=ABCMeta):
     """
     Class to represent a radio packet.
 
@@ -29,8 +29,6 @@ class RadioPacket(dict):
 
     Metadata relevant to radio simulation should be added as attributes.
     """
-
-    __metaclass__ = ABCMeta
 
     def __init__(self, *args, **kwargs):
         dict.__init__(self, *args, **kwargs)
@@ -43,11 +41,10 @@ class RadioPacket(dict):
     def bytes(self):
         pass
 
-class Radio(Component):
+class Radio(Component, metaclass=ABCMeta):
     """
     Base class for radios.
     """
-    __metaclass__ = ABCMeta
 
     def __init__(self, platform):
         Component.__init__(self, platform)

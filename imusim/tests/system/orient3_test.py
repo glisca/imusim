@@ -18,7 +18,7 @@ Test of Orient-3 IMU model.
 # You should have received a copy of the GNU General Public License
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
+
 from imusim.environment.base import Environment
 from imusim.simulation.base import Simulation
 from imusim.simulation.calibrators import ScaleAndOffsetCalibrator

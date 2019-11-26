@@ -18,7 +18,7 @@ Mathematical transforms.
 # You should have received a copy of the GNU General Public License
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
+
 import numpy as np
 from imusim.maths.quaternions import Quaternion, QuaternionArray
 from imusim.maths.vectors import vector
@@ -112,7 +112,7 @@ class UnscentedTransform(object):
         returnSigmas = kwargs.pop('returnSigmas', False)
         inputSigmaPoints, weights = UnscentedTransform.sigmaPoints(mean, covariance)
         outputSigmaPoints = [self._function(p, *args, **kwargs) for p in inputSigmaPoints]
-        weightedOutputPoints = zip(weights, outputSigmaPoints)
+        weightedOutputPoints = list(zip(weights, outputSigmaPoints))
         outputMean = self._sum(W*y for W,y in weightedOutputPoints)
         outputCovariance = self._sum(W*(y-outputMean)*(y-outputMean).T for W,y in weightedOutputPoints)
         if returnSigmas:

@@ -3,6 +3,7 @@ from docutils import nodes
 import inspect
 import imusim
 import imusim.all
+from functools import reduce
 
 def imusim_api_role(role, rawtext, text, lineno, inliner, options={}, content=[]):
     """
@@ -21,7 +22,7 @@ def imusim_api_role(role, rawtext, text, lineno, inliner, options={}, content=[]
         elif inspect.isfunction(obj):
             file = '%s-module.html#%s' % (obj.__module__, obj.__name__)
         elif inspect.ismethod(obj):
-            cls = obj.im_class
+            cls = obj.__self__.__class__
             file = '%s.%s-class.html#%s' \
                     % (cls.__module__, cls.__name__, obj.__name__)
         elif inspect.isbuiltin(obj):
@@ -34,18 +35,16 @@ def imusim_api_role(role, rawtext, text, lineno, inliner, options={}, content=[]
                 file = '%s.%s-class.html#%s' \
                     % (cls.__module__, cls.__name__, obj.__name__)
             else:
-                raise TypeError, \
-                        "Don't know how to document native object " + repr(obj)
+                raise TypeError("Don't know how to document native object " + repr(obj))
         else:
-            raise TypeError, \
-                    "Don't know how to document Python object " + repr(obj)
+            raise TypeError("Don't know how to document Python object " + repr(obj))
     except AttributeError:
         # Look for object as an imusim submodule.
         __import__("imusim.%s" % text)
         obj = reduce(lambda x,y: getattr(x,y), [imusim] + text.split('.'))
         file = 'imusim.%s-module.html' % text
     except ImportError:
-        raise KeyError, "Could not find an IMUSim object called '%s'" % text
+        raise KeyError("Could not find an IMUSim object called '%s'" % text)
 
     if inspect.ismethod(obj) \
             or (inspect.isbuiltin(obj) and hasattr(obj, '__objclass__')):

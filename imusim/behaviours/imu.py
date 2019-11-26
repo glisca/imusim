@@ -26,7 +26,7 @@ from imusim.platforms.sensors import Sensor
 from imusim.algorithms.orientation import OrientationFilter
 from imusim.platforms.imus import IMU
 
-class BasicIMUBehaviour(object):
+class BasicIMUBehaviour(object, metaclass=ABCMeta):
     """
     Basic behaviour for an IMU that performs periodic sampling.
 
@@ -39,8 +39,6 @@ class BasicIMUBehaviour(object):
         object will be passed as a single argument.
     @ivar timerMux: L{TimerMultiplexer} for IMU timer.
     """
-
-    __metaclass__ = ABCMeta
 
     def __init__(self, imu, samplingPeriod, calibration=None, filter=None,
             sampleCallback=None, initialTime=0):

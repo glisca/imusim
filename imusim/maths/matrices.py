@@ -18,11 +18,12 @@ Utilities for working with matrices.
 # You should have received a copy of the GNU General Public License
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
+
 import numpy as np
 import math
 import operator
-from itertools import izip
+from functools import reduce
+
 
 _rotationMatrices = dict(
     x = lambda rx: np.matrix((
@@ -111,8 +112,8 @@ def matrixToEuler(m,order='zyx',inDegrees=True):
     """
 
     order = order.lower()
-    if order not in _eulerFuncs.keys():
-        raise NotImplementedError, "Order %s not implemented" % order
+    if order not in list(_eulerFuncs.keys()):
+        raise NotImplementedError("Order %s not implemented" % order)
     result = np.array(_eulerFuncs[order](m))
 
     if inDegrees:
@@ -140,4 +141,4 @@ def matrixFromEuler(angles, order, inDegrees=True):
 
     return reduce(operator.mul,
             (_rotationMatrices[axis](angle) for axis,angle in
-                izip(order.lower(), angles)))
+                zip(order.lower(), angles)))

@@ -46,7 +46,7 @@ class MarkerCapture(object):
         """
         List of the markers in this capture.
         """
-        return self._markers.values()
+        return list(self._markers.values())
 
     def marker(self, id):
         """

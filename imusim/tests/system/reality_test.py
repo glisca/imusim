@@ -18,7 +18,7 @@ Test simulated outputs against real captured sensor data.
 # You should have received a copy of the GNU General Public License
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
+
 from imusim.io.qualisys_tsv import loadQualisysTSVFile
 from imusim.capture.marker import SplinedMarkerCapture
 from imusim.trajectories.multi_marker import MultiMarkerTrajectory
@@ -66,12 +66,12 @@ def testAgainstReality():
     imuMarkerNames = \
             [[j + ' IMU - ' + str(i) for i in range(1,4)] for j in jointNames]
     jointMarkerSets = lambda c: [
-        map(c.marker, jointMarkerNames),
-        [map(c.marker, r) for r in refMarkerNames],
-        [map(c.marker, i) for i in imuMarkerNames]]
+        list(map(c.marker, jointMarkerNames)),
+        [list(map(c.marker, r)) for r in refMarkerNames],
+        [list(map(c.marker, i)) for i in imuMarkerNames]]
     imuMarkerSets = lambda c: [
         [c.marker(i[0]) for i in imuMarkerNames],
-        [map(c.marker,i[1:]) for i in imuMarkerNames]]
+        [list(map(c.marker,i[1:])) for i in imuMarkerNames]]
     jointRefTrajectories = [MultiMarkerTrajectory(j, r + i, refTime=refTime)
         for j, r, i in zip(*(jointMarkerSets(ref3D)))]
     jointTrajectories = [

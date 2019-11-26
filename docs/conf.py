@@ -41,8 +41,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'IMUSim'
-copyright = u'2009-2011, University of Edinburgh'
+project = 'IMUSim'
+copyright = '2009-2011, University of Edinburgh'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -179,7 +179,7 @@ htmlhelp_basename = 'IMUSim-tutorial'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'IMUSim.tex', u'IMUSim Tutorial', u'Martin Ling', 'howto'),
+  ('index', 'IMUSim.tex', 'IMUSim Tutorial', 'Martin Ling', 'howto'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -211,7 +211,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'imusim', u'IMUSim Tutorial', [u'Martin Ling'], 1)
+    ('index', 'imusim', 'IMUSim Tutorial', ['Martin Ling'], 1)
 ]
 
 # Example configuration for intersphinx: refer to the Python standard library.

@@ -21,14 +21,12 @@ Radio environment models.
 import numpy as np
 from abc import ABCMeta, abstractmethod
 
-class RadioEnvironment(object):
+class RadioEnvironment(object, metaclass=ABCMeta):
     """
     Base class for radio environment models.
 
     @ivar receivers: list of potential receivers
     """
-
-    __metaclass__ = ABCMeta
 
     def __init__(self):
         """

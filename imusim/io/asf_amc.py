@@ -145,9 +145,9 @@ def loadASFFile(asfFileName, amcFileName, scaleFactor, framePeriod):
                             data['ty'],data['tz']))
                         imusimModel.positionKeyFrames.add(t, position)
 
-                    axes, angles = zip(*[(chan[-1], angle) for chan, angle in
+                    axes, angles = list(zip(*[(chan[-1], angle) for chan, angle in
                         zip(bonedata.channels, bone.channels) if
-                                chan.lower().startswith('r')])
+                                chan.lower().startswith('r')]))
                     rotation = (bonedata.rotationOffset.conjugate *
                             Quaternion.fromEuler(angles[::-1], axes[::-1]))
                     joint = imusimModel.getJoint(bone.name)

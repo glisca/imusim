@@ -26,12 +26,10 @@ from imusim.utilities.documentation import prepend_method_doc
 import SimPy.Simulation
 import numpy as np
 
-class ADC(Component):
+class ADC(Component, metaclass=ABCMeta):
     """
     Base class for ADCs.
     """
-
-    __metaclass__ = ABCMeta
 
     @abstractmethod
     def transferFunction(self, voltageValues):

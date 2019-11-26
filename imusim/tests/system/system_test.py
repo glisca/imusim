@@ -62,7 +62,7 @@ def checkSystemSimulation(filterClass):
     simModel = SplinedBodyModel(loadBVHFile(testMotion, conversionFactor=0.01))
     sim.time = simModel.startTime
     slotTime = 0.001
-    schedule = Schedule(slotTime, slotTime, range(len(list(simModel.joints))))
+    schedule = Schedule(slotTime, slotTime, list(range(len(list(simModel.joints)))))
 
     def setupIMU(id, joint):
         platform = MagicIMU()

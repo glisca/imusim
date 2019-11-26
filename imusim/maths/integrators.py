@@ -22,11 +22,10 @@ from imusim.utilities.documentation import prepend_method_doc
 from abc import ABCMeta, abstractmethod
 from copy import copy
 
-class Integrator(object):
+class Integrator(object, metaclass=ABCMeta):
     """
     Base class for integrators.
     """
-    __metaclass__ = ABCMeta
 
     def __init__(self, initialValue):
         """

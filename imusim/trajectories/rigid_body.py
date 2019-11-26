@@ -122,7 +122,7 @@ class Joint(Point):
         """
         List of child joints that have this joint as parent.
         """
-        return filter(lambda p: p.isJoint, self.children)
+        return [p for p in self.children if p.isJoint]
 
     @property
     def hasChildJoints(self):

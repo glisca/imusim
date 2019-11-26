@@ -18,7 +18,7 @@ Models of hardware timers.
 # You should have received a copy of the GNU General Public License
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
+
 from abc import ABCMeta, abstractmethod
 from imusim.platforms.base import Component
 from imusim.simulation.base import Simulation
@@ -26,14 +26,12 @@ from imusim.utilities.documentation import prepend_method_doc
 import SimPy.Simulation
 import numpy as np
 
-class Timer(Component):
+class Timer(Component, metaclass=ABCMeta):
     """
     Base class for simulated hardware timers.
 
     @ivar callback: Function to be called when timer fires.
     """
-
-    __metaclass__ = ABCMeta
 
     def __init__(self, platform):
         self._process = None

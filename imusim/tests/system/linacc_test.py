@@ -57,8 +57,8 @@ def testDistLinAccSimulation():
     sim.time = simModel.startTime
     k = 128
     slotTime = 0.001
-    txSlots = range(2, len(joints)) + [0,1]
-    auxRxSlots = range(1, len(joints))
+    txSlots = list(range(2, len(joints))) + [0,1]
+    auxRxSlots = list(range(1, len(joints)))
     auxTxSlots = [joints.index(j.parent) for j in joints[1:]]
     schedule = InterSlaveSchedule(slotTime, slotTime, txSlots,
             auxTxSlots, auxRxSlots)

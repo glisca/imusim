@@ -23,12 +23,10 @@ from imusim.maths.quaternions import Quaternion, QuaternionArray
 from scipy.linalg import expm
 import numpy as np
 
-class AbstractTrajectory(object):
+class AbstractTrajectory(object, metaclass=ABCMeta):
     """
     Base class of trajectories
     """
-
-    __metaclass__ = ABCMeta
 
     @abstractproperty
     def startTime(self):

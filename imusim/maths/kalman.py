@@ -18,11 +18,11 @@ Standard and unscented Kalman filters.
 # You should have received a copy of the GNU General Public License
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
+
 import numpy as np
 from imusim.maths.transforms import UnscentedTransform
 from numpy.linalg import inv
-from itertools import izip
+
 
 class KalmanFilter(object):
     """
@@ -297,7 +297,7 @@ class UnscentedKalmanFilter(KalmanFilter):
             stateSigmas, measurementSigmas, weights = \
                 self._measurementUT(self._x, self._P, returnSigmas=True)
         x,y = self._x, predictedMeasurement
-        sigmaPoints = izip(weights, stateSigmas, measurementSigmas)
+        sigmaPoints = zip(weights, stateSigmas, measurementSigmas)
         innovation = measurement - predictedMeasurement
         innovationCovariance = self._R + predictionCovariance
         crossCovariance = np.sum((w*(X-x)*(Y-y).T for (w,X,Y) in sigmaPoints), axis=0)

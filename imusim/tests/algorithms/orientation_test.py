@@ -68,7 +68,7 @@ def runOrientationFilter(filter, trajectory):
         mag = magSamples[:,i:i+1]
         gyro = gyroSamples[:,i:i+1]
         estimatedOrientations[i] = filter.rotation.latestValue
-        filter(accel, mag, gyro, t[i])
+        list(filter(accel, mag, gyro, t[i]))
 
     return trueOrientations, estimatedOrientations
 
@@ -103,7 +103,7 @@ def checkStaticConvergence(filterClass, performTest=True):
     estimatedQuaternions = QuaternionArray(np.empty((SAMPLES,4)))
 
     for i in range(SAMPLES):
-        filter(accel, mag, gyro, dt*(1+i))
+        list(filter(accel, mag, gyro, dt*(1+i)))
         estimatedQuaternions[i] = filter.rotation.latestValue
 
     if performTest:

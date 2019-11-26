@@ -18,7 +18,7 @@ Simulation model of the TDMA scheme used by the Orient IMU system.
 # You should have received a copy of the GNU General Public License
 # along with IMUSim.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
+
 from imusim.behaviours.mac import MAC
 from imusim.behaviours.timing import VirtualTimer
 from imusim.platforms.radios import RadioPacket
@@ -78,7 +78,7 @@ class DataPacket(RadioPacket):
     @property
     def bytes(self):
         size = 2
-        for key in self.keys():
+        for key in list(self.keys()):
             data = self[key]
             if isinstance(data, Quaternion):
                 size += array(data.components).nbytes

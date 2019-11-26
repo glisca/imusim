@@ -21,12 +21,10 @@ Base class for simulated hardware platforms.
 from abc import ABCMeta, abstractproperty, abstractmethod
 from imusim.simulation.base import Simulation
 
-class Platform(object):
+class Platform(object, metaclass=ABCMeta):
     """
     Base class for simulated hardware platforms.
     """
-
-    __metaclass__ = ABCMeta
 
     def __init__(self, simulation=None, trajectory=None):
         """
@@ -86,12 +84,10 @@ class Platform(object):
         for component in self.components:
             component._trajectoryChange()
 
-class Component(object):
+class Component(object, metaclass=ABCMeta):
     """
     Base class for simulated hardware components.
     """
-
-    __metaclass__ = ABCMeta
 
     def __init__(self, platform):
         """
