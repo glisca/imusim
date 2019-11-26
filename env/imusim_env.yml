@@ -136,7 +136,6 @@ dependencies:
   - pip:
     - freetype-py==2.1.0.post1
     - imageio==2.6.1
-    - imusim==0.2
     - networkx==2.2
     - pillow==6.2.1
     - pyglet==1.4.0b1
