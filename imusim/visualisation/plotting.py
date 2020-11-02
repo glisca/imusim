@@ -83,6 +83,7 @@ def plot(x, y=None, *args, **kwargs):
             plotTimeSeries(x, *args, **kwargs)
         else:
             y = x
+        return
 
     if isinstance(y, (list,tuple)):
         if isinstance(y[0], Quaternion):

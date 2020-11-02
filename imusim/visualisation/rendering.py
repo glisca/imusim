@@ -71,17 +71,22 @@ class InteractiveAnimation(HasTraits):
         for r in self._renderers:
             r.renderUpdate(self.time)
         self.edit_traits()
+#         self.app = wx.App()
+#         print("InteractiveAnimation initialized ...")
 
     def _startButton_fired(self):
         self.playing = True
         self.lastRenderTime = time.time()
-        wx.GetApp().Bind(wx.EVT_IDLE, self._onIdleEvent)
+        print("wx.GetApp() {}".format(wx.GetApp()))
+        self.app = wx.App()
+        self.app.Get().Bind(wx.EVT_IDLE, self._onIdleEvent)
 
     def start(self):
         """ Start animation. """
         self._startButton_fired()
 
     def _stopButton_fired(self):
+        print("wx.GetApp() {}".format(wx.GetApp()))
         wx.GetApp().Bind(wx.EVT_IDLE, None)
         self.playing = False
 
@@ -93,6 +98,7 @@ class InteractiveAnimation(HasTraits):
         if self.playing:
             self._scene.disable_render = True
             timeNow = time.time()
+            print("timeNow {}".format(timeNow))
             t = self.time + (timeNow - self.lastRenderTime) * self.speed
             if t > self._tMax:
                 self.time = self._tMin + t - self._tMax
@@ -212,6 +218,35 @@ class VelocityVectorRenderer(AnimatedRenderer):
         x,y,z,u,v,w = self._generateDataVector(t)
         self.datasources.set(x=x, y=y, z=z, u=u, v=v, w=w)
 
+class AccelerationVectorRenderer(AnimatedRenderer):
+    """
+    Renders the acceleration vectors of a trajectory.
+
+    Additional arguments are passed to the L{mayavi.mlab.quiver3d}
+    function to control the appearance of the rendered model.
+
+    @param trajectory: The trajectory to render the velocity of.
+    """
+
+    def __init__(self, trajectory, *args, **kwargs):
+        AnimatedRenderer.__init__(self, *args, **kwargs)
+        self._trajectory = trajectory
+
+    def _generateDataVector(self, t):
+        px,py,pz = self._trajectory.position(t)
+        ax,ay,az = self._trajectory.acceleration(t)
+        return px,py,pz,ax,ay,az
+
+    def renderSnapshot(self, t):
+        px,py,pz,ax,ay,az = self._generateDataVector(t)
+        return mlab.quiver3d(px,py,pz,ax,ay,az, scale_factor=1,
+                *self._mlab_args, **self._mlab_kwargs).mlab_source
+
+    def renderUpdate(self, t):
+        x,y,z,u,v,w = self._generateDataVector(t)
+        self.datasources.set(x=x, y=y, z=z, u=u, v=v, w=w)
+
+        
 class ContactProbabilityRenderer(AnimatedRenderer):
     """
     Renders the contact probabilities of body model points.
